@@ -1,0 +1,46 @@
+name: egmde
+version: 0.1
+summary: A minimal Mir based shell for kiosk type applications
+description: A minimal Mir based shell for kiosk type applications
+confinement: classic
+grade: devel
+
+apps:
+  egmde:
+    command: bin/egmde-desktop
+    daemon: simple
+    slots:
+      - mir
+      - wayland
+    plugs:
+      - opengl
+    environment:
+      # Share the wayland sockets via content interface, so place in dedicated directory
+      XDG_RUNTIME_DIR: $SNAP_DATA
+      XKB_CONFIG_ROOT: $SNAP/usr/share/X11/xkb
+      XCURSOR_PATH:    $SNAP/icons
+
+slots:
+  wayland-socket-dir:
+    interface: content
+    content: wayland-socket-dir
+    write: [ $SNAP_DATA ]
+
+parts:
+  egmde:
+    plugin: cmake
+    source: https://github.com/AlanGriffiths/egmde.git
+    build-packages:
+      - libmiral-dev
+    stage-packages:
+      - mir-graphics-drivers-desktop
+      - mir-demos
+      - weston # for weston-terminal
+
+  icons:
+    plugin: nil
+    stage-packages: [dmz-cursor-theme]
+    organize:
+      usr/share/icons/DMZ-White: icons/default
+    prime:
+     - icons/default
