@@ -2,12 +2,12 @@ name: egmde
 version: 0.1
 summary: A minimal Mir based shell for kiosk type applications
 description: A minimal Mir based shell for kiosk type applications
-confinement: classic
+confinement: devmode
 grade: devel
 
 apps:
   egmde:
-    command: bin/egmde-desktop
+    command: bin/egmde.launcher
     daemon: simple
     slots:
       - mir
@@ -33,6 +33,7 @@ parts:
     build-packages:
       - libmiral-dev
     stage-packages:
+      - fonts-freefont-ttf
       - mir-graphics-drivers-desktop
       - mir-demos
       - weston # for weston-terminal
@@ -44,3 +45,9 @@ parts:
       usr/share/icons/DMZ-White: icons/default
     prime:
      - icons/default
+
+  launcher:
+    plugin: dump
+    source: glue
+    organize:
+      egmde.launcher: bin/

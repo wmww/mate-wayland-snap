@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+if [ "$SNAP_ARCH" == "amd64" ]; then
+    ARCH="x86_64-linux-gnu"
+elif [ "$SNAP_ARCH" == "armhf" ]; then
+    ARCH="arm-linux-gnueabihf"
+elif [ "$SNAP_ARCH" == "arm64" ]; then
+    ARCH="aarch64-linux-gnu"
+else
+    ARCH="$SNAP_ARCH-linux-gnu"
+fi
+
+# Prep for Mir
+export MIR_CLIENT_PLATFORM_PATH=${SNAP}/usr/lib/${ARCH}/mir/client-platform
+export MIR_SERVER_PLATFORM_PATH=${SNAP}/usr/lib/${ARCH}/mir/server-platform
+
+export LC_ALL="C.UTF-8"
+
+mkdir -p $XDG_RUNTIME_DIR # make sure it exists
+
+# avoid hardcoded (wrong) paths to a font
+export EGMDE_FONT=$SNAP/usr/share/fonts/truetype/freefont/FreeSansBold.ttf
+
+# Run server
+$SNAP/bin/egmde --vt 4 --arw-file
