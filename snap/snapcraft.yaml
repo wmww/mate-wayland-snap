@@ -32,6 +32,8 @@ parts:
     source: https://github.com/AlanGriffiths/egmde.git
     build-packages:
       - libmiral-dev
+      - libboost-dev
+      - libfreetype6-dev
     stage-packages:
       - fonts-freefont-ttf
       - mir-graphics-drivers-desktop
