@@ -31,8 +31,9 @@ parts:
     plugin: cmake
     source: https://github.com/AlanGriffiths/egmde.git
     build-packages:
+      - pkg-config
       - libmiral-dev
-      - libboost-dev
+      - libboost-filesystem-dev
       - libfreetype6-dev
     stage-packages:
       - fonts-freefont-ttf
