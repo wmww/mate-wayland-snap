@@ -23,4 +23,4 @@ mkdir -p $XDG_RUNTIME_DIR # make sure it exists
 export EGMDE_FONT=$SNAP/usr/share/fonts/truetype/freefont/FreeSansBold.ttf
 
 # Run server
-$SNAP/bin/egmde --vt 4 --arw-file
+$SNAP/bin/egmde $@
