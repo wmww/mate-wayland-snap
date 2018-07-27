@@ -49,6 +49,7 @@ parts:
     source: glue
     organize:
       egmde.launcher: bin/
+      egmde.desktop: bin/
 
   mesa:
     plugin: nil
