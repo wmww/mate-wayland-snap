@@ -9,4 +9,4 @@ install; switch to a VT; log in; snap run egmde
 
 This does work (but is not ideal):
 
-install; switch to a VT; log in; sudo snap run egmde
+install; switch to a VT; log in; sudo snap run egmde --vt 0
