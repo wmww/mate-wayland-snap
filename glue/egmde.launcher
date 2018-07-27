@@ -17,7 +17,8 @@ export MIR_SERVER_PLATFORM_PATH=${SNAP}/usr/lib/${ARCH}/mir/server-platform
 
 export LC_ALL="C.UTF-8"
 
-mkdir -p $XDG_RUNTIME_DIR # make sure it exists
+# For a classic snap this needs to be something sane
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 # avoid hardcoded (wrong) paths to a font
 export EGMDE_FONT=$SNAP/usr/share/fonts/truetype/freefont/FreeSansBold.ttf
