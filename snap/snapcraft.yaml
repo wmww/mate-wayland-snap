@@ -22,12 +22,6 @@ apps:
       XCURSOR_PATH:    $SNAP/icons
       __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
 
-slots:
-  wayland-socket-dir:
-    interface: content
-    content: wayland-socket-dir
-    write: [ $SNAP_DATA ]
-
 parts:
   egmde:
     plugin: cmake
