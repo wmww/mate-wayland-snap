@@ -10,11 +10,6 @@ apps:
   egmde:
     command: bin/egmde.launcher
     daemon: simple
-    slots:
-      - mir
-      - wayland
-    plugs:
-      - opengl
     environment:
       # Share the wayland sockets via content interface, so place in dedicated directory
       XDG_RUNTIME_DIR: $SNAP_DATA
