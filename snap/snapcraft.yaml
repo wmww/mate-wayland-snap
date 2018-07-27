@@ -40,8 +40,7 @@ parts:
     stage-packages:
       - fonts-freefont-ttf
       - mir-graphics-drivers-desktop
-      - mir-demos
-      - weston # for weston-terminal
+      - libmiral3
 
   icons:
     plugin: nil
