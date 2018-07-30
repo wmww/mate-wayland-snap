@@ -50,3 +50,8 @@ parts:
     plugin: nil
     stage-packages:
       - libgl1-mesa-dri
+
+  wayland:
+    plugin: nil
+    stage-packages:
+      - qtwayland5

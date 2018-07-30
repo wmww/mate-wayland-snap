@@ -15,6 +15,9 @@ fi
 export MIR_CLIENT_PLATFORM_PATH=${SNAP}/usr/lib/${ARCH}/mir/client-platform
 export MIR_SERVER_PLATFORM_PATH=${SNAP}/usr/lib/${ARCH}/mir/server-platform
 
+# Prep for Qt wayland
+export QT_PLUGIN_PATH=${SNAP}/usr/lib/${ARCH}/qt5/plugins/
+
 export LC_ALL="C.UTF-8"
 
 # For a classic snap this needs to be something sane
