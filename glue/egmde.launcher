@@ -24,4 +24,4 @@ export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export EGMDE_FONT=$SNAP/usr/share/fonts/truetype/freefont/FreeSansBold.ttf
 
 # Run server
-$SNAP/bin/egmde $@
+dbus-run-session -- $SNAP/bin/egmde $@
