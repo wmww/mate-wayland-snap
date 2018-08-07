@@ -2,9 +2,21 @@
 
 Sample project for snapping up egmde.
 
+## From the snap store
+
+    sudo snap install --classic --edge egmde
+
+## Run as X11 app desktop
+
+    snap run egmde
+
+## Run as desktop session
+
+Log out and select "egmde" session when logging back in.
+
 ## Build & install
 
-This needs Ubuntu 18.04LTS.
+If you want to build it yourself this needs Ubuntu 18.04LTS.
 
 Add the mir-team/release PPA *(or the /dev PPA for extra adventure)*:
 
@@ -14,11 +26,3 @@ Build and install snap:
 
     snapcraft 
     snap install --dangerous --classic ./egmde_0.1_amd64.snap
-
-## Run as X11 app desktop
-
-    snap run egmde
-
-## Run as desktop session
-
-Log out and select "egmde" session when logging back in.
