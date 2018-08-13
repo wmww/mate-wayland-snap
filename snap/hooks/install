@@ -1,3 +1,4 @@
 #!/bin/sh
 
+mkdir -p /usr/share/wayland-sessions/
 cp $SNAP/bin/egmde.desktop /usr/share/wayland-sessions/egmde.desktop
