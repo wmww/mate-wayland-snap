@@ -4,7 +4,7 @@ Sample project for snapping up egmde.
 
 ## From the snap store
 
-    sudo snap install --classic --edge egmde
+    sudo snap install --classic --beta egmde
 
 ## Run as X11 app desktop
 
