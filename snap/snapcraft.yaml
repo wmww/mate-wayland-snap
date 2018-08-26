@@ -1,5 +1,7 @@
 name: egmde
-version: 0.1
+version: egmde
+version-script: |
+  LANG=C apt-cache policy libmiral-dev | sed -rne 's/^\s+Candidate:\s+(.*)-[^-]+$/0.1-miral\1/p'
 summary: A minimal example Mir based desktop shell
 description: A minimal example Mir based desktop shell
 confinement: classic
