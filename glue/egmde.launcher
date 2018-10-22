@@ -1,30 +1,8 @@
 #!/bin/bash
 set -e
 
-if [ "$SNAP_ARCH" == "amd64" ]; then
-    ARCH="x86_64-linux-gnu"
-elif [ "$SNAP_ARCH" == "armhf" ]; then
-    ARCH="arm-linux-gnueabihf"
-elif [ "$SNAP_ARCH" == "arm64" ]; then
-    ARCH="aarch64-linux-gnu"
-else
-    ARCH="$SNAP_ARCH-linux-gnu"
-fi
-
-# Prep for Mir
-export MIR_CLIENT_PLATFORM_PATH=${SNAP}/usr/lib/${ARCH}/mir/client-platform
-export MIR_SERVER_PLATFORM_PATH=${SNAP}/usr/lib/${ARCH}/mir/server-platform
-
-# Prep for Qt wayland
-export QT_PLUGIN_PATH=${SNAP}/usr/lib/${ARCH}/qt5/plugins/
-
-export LC_ALL="C.UTF-8"
-
 # For a classic snap this needs to be something sane
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
-
-# avoid hardcoded (wrong) paths to a font
-export EGMDE_FONT=$SNAP/usr/share/fonts/truetype/freefont/FreeSansBold.ttf
 
 # Run server
 dbus-run-session -- $SNAP/bin/egmde $@

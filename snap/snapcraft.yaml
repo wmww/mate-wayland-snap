@@ -12,9 +12,11 @@ apps:
   egmde:
     command: bin/egmde.launcher
     environment:
-      XKB_CONFIG_ROOT: $SNAP/usr/share/X11/xkb
-      XCURSOR_PATH:    $SNAP/icons
-      __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
+      # Prep for Mir
+      MIR_CLIENT_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/client-platform
+      MIR_SERVER_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/server-platform
+      # Prep for Qt wayland
+      QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/plugins/
 
 parts:
   egmde:
@@ -26,17 +28,8 @@ parts:
       - libboost-filesystem-dev
       - libfreetype6-dev
     stage-packages:
-      - fonts-freefont-ttf
       - mir-graphics-drivers-desktop
       - libmiral3
-
-  icons:
-    plugin: nil
-    stage-packages: [dmz-cursor-theme]
-    organize:
-      usr/share/icons/DMZ-White: icons/default
-    prime:
-     - icons/default
 
   launcher:
     plugin: dump
@@ -44,11 +37,6 @@ parts:
     organize:
       egmde.launcher: bin/
       egmde.desktop: bin/
-
-  mesa:
-    plugin: nil
-    stage-packages:
-      - libgl1-mesa-dri
 
   wayland:
     plugin: nil
