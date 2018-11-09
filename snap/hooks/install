@@ -3,6 +3,9 @@
 mkdir -p /usr/share/wayland-sessions/
 cp $SNAP/bin/egmde.desktop /usr/share/wayland-sessions/egmde.desktop
 
+# Ensure Wayland support is available for Qt apps
+apt --assume-yes install qtwayland5
+
 if [ "$(readlink -f /snap/core18/current/lib64/ld-linux-x86-64.so.2)" = "/lib/x86_64-linux-gnu/ld-2.27.so" ]; then
   echo "Working around broken /snap/core18/current/lib64/ld-linux-x86-64.so.2 symlink"
   if [ ! -f /lib/x86_64-linux-gnu/ld-2.27.so ]; then

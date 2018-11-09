@@ -15,8 +15,6 @@ apps:
       # Prep for Mir
       MIR_CLIENT_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/client-platform
       MIR_SERVER_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/server-platform
-      # Prep for Qt wayland
-      QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/plugins/
       __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
 
 parts:
@@ -49,11 +47,6 @@ parts:
     organize:
       egmde.launcher: bin/
       egmde.desktop: bin/
-
-  wayland:
-    plugin: nil
-    stage-packages:
-      - qtwayland5
 
   mesa:
     plugin: nil
