@@ -17,9 +17,21 @@ apps:
       MIR_SERVER_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/server-platform
       # Prep for Qt wayland
       QT_PLUGIN_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/qt5/plugins/
+      __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
 
 parts:
+  ppa-mir-release:
+    plugin: nil
+    override-pull: |
+      sudo apt --assume-yes install software-properties-common
+      sudo add-apt-repository -yu ppa:mir-team/release
+      # We shouldn't need to install stuff here, but it seems to fix intermittent build failures
+      sudo apt --assume-yes install libmiral-dev mir-graphics-drivers-desktop
+      sudo apt clean
+      snapcraftctl pull
+
   egmde:
+    after: [ppa-mir-release]
     plugin: cmake
     source: https://github.com/AlanGriffiths/egmde.git
     build-packages:
@@ -42,3 +54,8 @@ parts:
     plugin: nil
     stage-packages:
       - qtwayland5
+
+  mesa:
+    plugin: nil
+    stage-packages:
+    - libgl1-mesa-dri
