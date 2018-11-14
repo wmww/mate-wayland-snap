@@ -4,5 +4,19 @@ set -e
 # For a classic snap this needs to be something sane
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
+if x11_display=$(snapctl get x11-display); then
+  if [ "${x11_display}" == "auto" ]; then
+    x11_display=0
+
+    while [ -e "/tmp/.X11-unix/X${x11_display}" ]; do
+      let x11_display+=1
+    done
+  fi
+  if [ "${x11_display}" != "none" ]; then
+    export MIR_SERVER_X11_DISPLAY_EXPERIMENTAL=${x11_display}
+    export MIR_X11_LAZY=on
+  fi
+fi
+
 # Run server
-dbus-run-session -- $SNAP/bin/egmde $@
+exec dbus-run-session -- $SNAP/bin/egmde $@
