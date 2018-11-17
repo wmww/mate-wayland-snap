@@ -2,12 +2,14 @@
 set -e
 
 if x11_display=$(snapctl get x11-display); then
-  if [[ ! "${x11_display}" =~ ^(auto|none)$ ]]; then
-    if [ ${x11_display} -eq ${x11_display} 2>/dev/null ]; then
-      :
-    else
-      echo "x11-display can only be 'none', 'auto', or a port number"
-      exit 1
+  if [ -n "${display_config}" ]; then
+    if [[ ! "${x11_display}" =~ ^(auto|none)$ ]]; then
+      if [ ${x11_display} -eq ${x11_display} 2>/dev/null ]; then
+        :
+      else
+        echo "x11-display can only be 'none', 'auto', or a port number"
+        exit 1
+      fi
     fi
   fi
 fi
