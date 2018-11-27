@@ -12,6 +12,9 @@ fi
 
 if [ "$(readlink -f /snap/core18/current/lib64/ld-linux-x86-64.so.2)" = "/lib/x86_64-linux-gnu/ld-2.27.so" ]; then
   echo "Working around broken /snap/core18/current/lib64/ld-linux-x86-64.so.2 symlink"
+  if [ ! -d "/lib/x86_64-linux-gnu/" ]; then
+    mkdir /lib/x86_64-linux-gnu/
+  fi
   if [ ! -f /lib/x86_64-linux-gnu/ld-2.27.so ]; then
     ln -s /snap/core18/current/lib/x86_64-linux-gnu/ld-2.27.so /lib/x86_64-linux-gnu/ld-2.27.so
   fi
