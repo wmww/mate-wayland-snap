@@ -2,7 +2,7 @@
 set -e
 
 if x11_display=$(snapctl get x11-display); then
-  if [ -n "${display_config}" ]; then
+  if [ -n "${x11_display}" ]; then
     if [[ ! "${x11_display}" =~ ^(auto|none)$ ]]; then
       if [ ${x11_display} -eq ${x11_display} 2>/dev/null ]; then
         :

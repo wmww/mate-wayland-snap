@@ -5,7 +5,7 @@ set -e
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 if x11_display=$(snapctl get x11-display); then
-  if [ -n "${display_config}" ]; then
+  if [ -n "${x11_display}" ]; then
     if [ "${x11_display}" == "auto" ]; then
       x11_display=0
 
