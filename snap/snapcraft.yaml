@@ -1,16 +1,16 @@
-name: egmde
-version: egmde
+name: mate-wayland
+version: mate-wayland
 version-script: |
   LANG=C apt-cache policy libmircore1 | sed -rne 's/^\s+Candidate:\s+([^-]*)-.+$/egmde'$(git --git-dir=parts/egmde/src/.git rev-list --count HEAD)'-mir\1/p'
-summary: A minimal example Mir based desktop shell
-description: A minimal example Mir based desktop shell
+summary: A prototype for the MATE desktop running on Wayland with Mir
+description: A prototype for the MATE desktop running on Wayland with Mir
 confinement: classic
 grade: devel
 base: core18
 
 apps:
-  egmde:
-    command: bin/egmde.launcher
+  mate-wayland:
+    command: bin/mate-wayland.launcher
     environment:
       # Prep for Mir
       MIR_CLIENT_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/client-platform
@@ -46,8 +46,8 @@ parts:
     plugin: dump
     source: glue
     organize:
-      egmde.launcher: bin/
-      egmde.desktop: bin/
+      mate-wayland.launcher: bin/
+      mate-wayland.desktop: bin/
 
   mesa:
     plugin: nil

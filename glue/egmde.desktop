@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=egmde
-Comment=The example Mir server
-Exec=snap run egmde
-Type=Application

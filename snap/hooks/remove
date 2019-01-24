@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rm /usr/share/wayland-sessions/egmde.desktop
+rm /usr/share/wayland-sessions/mate-wayland.desktop

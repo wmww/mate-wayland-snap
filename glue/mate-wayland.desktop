@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=MATE on Wayland
+Comment=The MATE desktop environment, running on Wayland with Mir
+Exec=snap run mate-wayland
+Type=Application
