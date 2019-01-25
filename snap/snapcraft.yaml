@@ -19,28 +19,84 @@ apps:
       EGMDE_LAUNCH_PREFIX: "env -u __EGL_VENDOR_LIBRARY_DIRS --"
 
 parts:
-  ppa-mir-release:
-    plugin: nil
-    override-pull: |
-      sudo apt --assume-yes install software-properties-common
-      sudo add-apt-repository -yu ppa:mir-team/release
-      # We shouldn't need to install stuff here, but it seems to fix intermittent build failures
-      sudo apt --assume-yes install libmiral-dev mir-graphics-drivers-desktop
-      sudo apt clean
-      snapcraftctl pull
+  mir-git:
+    plugin: cmake
+    source: https://github.com/MirServer/mir.git
+    configflags:
+      - -DCMAKE_INSTALL_PREFIX=usr/lib/`dpkg-architecture -q DEB_TARGET_GNU_TYPE`/
+      - -DMIR_ENABLE_TESTS=OFF
+      - -DMIR_PLATFORM=mesa-kms;mesa-x11
+    build-packages:
+      - build-essential
+      - xsltproc
+      - libboost-dev
+      - libboost-date-time-dev
+      - libboost-program-options-dev
+      - libboost-system-dev
+      - libboost-filesystem-dev
+      - libboost-iostreams-dev
+      - protobuf-compiler
+      - libdrm-dev
+      - libegl1-mesa-dev
+      - libgles2-mesa-dev
+      - libgl1-mesa-dev
+      - libgbm-dev
+      - libglm-dev
+      - libprotobuf-dev
+      - libgoogle-glog-dev
+      - liblttng-ust-dev
+      - libxkbcommon-dev
+      - libumockdev-dev
+      - umockdev
+      - libudev-dev
+      - libgtest-dev
+      - google-mock
+      - libxml++2.6-dev
+      - libglib2.0-dev
+      - libfreetype6-dev
+      - libevdev-dev
+      - libinput-dev
+      - uuid-dev
+      - python3
+      - nettle-dev
+      - libcapnp-dev
+      - capnproto
+      - libepoxy-dev
+      - python3-pil
+      - libxcb-composite0-dev
+      - libxcursor-dev
+      - libyaml-cpp-dev
+    stage-packages:
+      - libdrm2
+      - libegl1-mesa
+      - libgbm1
+      - libgles2
+      - libwayland-server0
+      - libxcursor1
+      - libxfixes3
+      - libxrender1
+      - libboost-iostreams1.65.1
+      - libfreetype6
+      - libgflags2.2
+      - libgoogle-glog0v5
+      - liblttng-ust0
+      - libunwind8
+      - liburcu6
+      - libwayland-egl1-mesa
+      - libxcb-composite0
+      - libxcb-render0
+      - libyaml-cpp0.5v5
 
   egmde:
-    after: [ppa-mir-release]
+    after: [mir-git]
     plugin: cmake
     source: https://github.com/AlanGriffiths/egmde.git
     build-packages:
       - pkg-config
-      - libmiral-dev
       - libboost-filesystem-dev
       - libfreetype6-dev
     stage-packages:
       - mir-graphics-drivers-desktop
-      - libmiral3
 
   launcher:
     plugin: dump
