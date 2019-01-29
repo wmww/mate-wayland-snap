@@ -1,7 +1,5 @@
 name: mate-wayland
-version: mate-wayland
-version-script: |
-  LANG=C apt-cache policy libmircore1 | sed -rne 's/^\s+Candidate:\s+([^-]*)-.+$/egmde'$(git --git-dir=parts/egmde/src/.git rev-list --count HEAD)'-mir\1/p'
+version: git
 summary: A prototype for the MATE desktop running on Wayland with Mir
 description: A prototype for the MATE desktop running on Wayland with Mir
 confinement: classic
@@ -16,7 +14,6 @@ apps:
       MIR_CLIENT_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/client-platform
       MIR_SERVER_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/server-platform
       __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
-      EGMDE_LAUNCH_PREFIX: "env -u __EGL_VENDOR_LIBRARY_DIRS --"
 
 parts:
   mir-git:
@@ -103,16 +100,12 @@ parts:
       - libwacom2
       - libxkbcommon0
 
-  egmde:
+  mirco:
     after: [mir-git]
     plugin: cmake
-    source: https://github.com/AlanGriffiths/egmde.git
+    source: https://github.com/wmww/mirco.git
     build-packages:
       - pkg-config
-      - libboost-filesystem-dev
-      - libfreetype6-dev
-    stage-packages:
-      - libboost-filesystem1.65.1
 
   launcher:
     plugin: dump

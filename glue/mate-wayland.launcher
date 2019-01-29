@@ -21,4 +21,4 @@ if x11_display=$(snapctl get x11-display); then
 fi
 
 # Run server
-exec dbus-run-session -- $SNAP/bin/egmde $@
+exec dbus-run-session -- $SNAP/bin/mirco $@
