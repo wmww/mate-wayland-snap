@@ -22,10 +22,17 @@ parts:
   mir-git:
     plugin: cmake
     source: https://github.com/MirServer/mir.git
-    configflags:
-      - -DCMAKE_INSTALL_PREFIX=usr/lib/`dpkg-architecture -q DEB_TARGET_GNU_TYPE`/
-      - -DMIR_ENABLE_TESTS=OFF
-      - -DMIR_PLATFORM=mesa-kms;mesa-x11
+    # Override the build process so we can install Mir in /usr/local
+    # Generated *.pc files have incorrect include paths when snapcraft is allowed to install in /root/stage
+    override-build: |
+        cmake ../src \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DMIR_ENABLE_TESTS=OFF \
+            -DMIR_PLATFORM='mesa-kms;mesa-x11'
+        cmake --build . -- -j10
+        cmake --build . --target install
+        DESTDIR=$SNAPCRAFT_PART_INSTALL cmake --build . --target install
+    # TODO Add a prime section so development headers and such don't get primed
     build-packages:
       - build-essential
       - xsltproc
@@ -86,6 +93,15 @@ parts:
       - libxcb-composite0
       - libxcb-render0
       - libyaml-cpp0.5v5
+      - libcapnp-0.6.1
+      - libboost-program-options1.65.1
+      - libevdev-dev
+      - libgudev-1.0-0
+      - libinput10
+      - libmtdev1
+      - libprotobuf-lite10
+      - libwacom2
+      - libxkbcommon0
 
   egmde:
     after: [mir-git]
@@ -96,7 +112,7 @@ parts:
       - libboost-filesystem-dev
       - libfreetype6-dev
     stage-packages:
-      - mir-graphics-drivers-desktop
+      - libboost-filesystem1.65.1
 
   launcher:
     plugin: dump
