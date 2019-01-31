@@ -16,6 +16,41 @@ apps:
       __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
 
 parts:
+  mate-common:
+    plugin: autotools
+    source: https://github.com/mate-desktop/mate-common.git
+    build-environment:
+      - ACLOCAL_FLAGS: -I /root/stage/share/aclocal/
+
+  mate-desktop:
+    after: [mate-common]
+    plugin: autotools
+    source: https://github.com/mate-desktop/mate-desktop.git
+    build-environment:
+      - prefix: /root/stage/
+    #    - ACLOCAL_FLAGS: -I /root/stage/share/aclocal/
+    #    - PKG_CONFIG_PATH: /usr/local/lib/pkgconfig/
+    build-packages:
+      - intltool
+      - gtk-doc-tools
+      - gobject-introspection
+      - libdconf-dev
+      - libgtk-3-dev
+      - iso-codes
+    stage-packages:
+      - libxcomposite1
+      - libxdamage1
+      - libxext6
+      - libxrandr2
+      - libatk1.0-0
+      - libatk-bridge2.0-0
+      - libcairo2
+      - libcairo-gobject2
+      - libepoxy0
+      - libgraphite2-3
+      - libgtk-3-0
+      - libgdk-pixbuf2.0-0
+
   mir-git:
     plugin: cmake
     source: https://github.com/MirServer/mir.git
