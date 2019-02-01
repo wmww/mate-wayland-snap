@@ -13,12 +13,15 @@ apps:
       # Prep for Mir
       MIR_CLIENT_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/client-platform
       MIR_SERVER_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/server-platform
-      __EGL_VENDOR_LIBRARY_DIRS: $SNAP/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
+      __EGL_VENDOR_LIBRARY_DIRS: ${SNAP}/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
 
 parts:
   mate-common:
     plugin: autotools
     source: https://github.com/mate-desktop/mate-common.git
+    override-build: |
+      snapcraftctl build
+      sed -i 's:^prefix=$:prefix=/root/stage/:g' ${SNAPCRAFT_PART_INSTALL}/bin/mate-doc-common
     build-environment:
       - ACLOCAL_FLAGS: -I /root/stage/share/aclocal/
 
@@ -26,10 +29,6 @@ parts:
     after: [mate-common]
     plugin: autotools
     source: https://github.com/mate-desktop/mate-desktop.git
-    build-environment:
-      - prefix: /root/stage/
-    #    - ACLOCAL_FLAGS: -I /root/stage/share/aclocal/
-    #    - PKG_CONFIG_PATH: /usr/local/lib/pkgconfig/
     build-packages:
       - intltool
       - gtk-doc-tools
