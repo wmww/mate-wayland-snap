@@ -19,6 +19,7 @@ parts:
   mate-common:
     plugin: autotools
     source: https://github.com/mate-desktop/mate-common.git
+    source-depth: 1
     override-build: |
       snapcraftctl build
       sed -i 's:^prefix=$:prefix=/root/stage/:g' ${SNAPCRAFT_PART_INSTALL}/bin/mate-doc-common
@@ -29,6 +30,7 @@ parts:
     after: [mate-common]
     plugin: autotools
     source: https://github.com/mate-desktop/mate-desktop.git
+    source-depth: 1
     build-packages:
       - intltool
       - gtk-doc-tools
@@ -49,6 +51,21 @@ parts:
       - libgraphite2-3
       - libgtk-3-0
       - libgdk-pixbuf2.0-0
+
+  mate-menu:
+    plugin: autotools
+    after: [mate-common]
+    # TODO change source to https://github.com/mate-desktop/mate-menus.git once https://github.com/mate-desktop/mate-menus/pull/64 is merged
+    source: https://github.com/wmww/mate-menus.git
+    source-depth: 1
+
+  # mate-utils:
+  #  plugin: autotools
+  #  after: [mate-common]
+  #  source: https://github.com/mate-desktop/mate-utils.git
+  #  source-depth: 1
+  #  build-packages:
+  #    - yelp-tools
 
   mir-git:
     plugin: cmake
