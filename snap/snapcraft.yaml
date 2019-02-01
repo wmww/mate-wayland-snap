@@ -19,16 +19,12 @@ parts:
   mir-git:
     plugin: cmake
     source: https://github.com/MirServer/mir.git
-    # Override the build process so we can install Mir in /usr/local
-    # Generated *.pc files have incorrect include paths when snapcraft is allowed to install in /root/stage
-    override-build: |
-        cmake ../src \
-            -DCMAKE_INSTALL_PREFIX=/usr \
-            -DMIR_ENABLE_TESTS=OFF \
-            -DMIR_PLATFORM='mesa-kms;mesa-x11'
-        cmake --build . -- -j10
-        cmake --build . --target install
-        DESTDIR=$SNAPCRAFT_PART_INSTALL cmake --build . --target install
+    source-branch: mate-support
+    source-depth: 1
+    configflags:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DMIR_ENABLE_TESTS=OFF
+      - -DMIR_PLATFORM=mesa-kms;mesa-x11
     # TODO Add a prime section so development headers and such don't get primed
     build-packages:
       - build-essential
@@ -91,6 +87,8 @@ parts:
       - libxcb-render0
       - libyaml-cpp0.5v5
       - libcapnp-0.6.1
+      - libboost-system1.65.1
+      - libboost-filesystem1.65.1
       - libboost-program-options1.65.1
       - libevdev-dev
       - libgudev-1.0-0
@@ -104,6 +102,7 @@ parts:
     after: [mir-git]
     plugin: cmake
     source: https://github.com/wmww/mirco.git
+    source-depth: 1
     build-packages:
       - pkg-config
 
