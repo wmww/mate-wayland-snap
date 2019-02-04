@@ -59,13 +59,35 @@ parts:
     source: https://github.com/wmww/mate-menus.git
     source-depth: 1
 
-  # mate-utils:
-  #  plugin: autotools
-  #  after: [mate-common]
-  #  source: https://github.com/mate-desktop/mate-utils.git
-  #  source-depth: 1
-  #  build-packages:
-  #    - yelp-tools
+  mate-weather:
+    plugin: autotools
+    after: [mate-common]
+    source: https://github.com/mate-desktop/libmateweather.git
+    source-depth: 1
+    build-packages:
+      - libsoup2.4-dev
+      - tzdata
+
+  mate-panel:
+    plugin: autotools
+    after: [mate-menu, mate-common, mate-desktop, mate-weather]
+    source: https://github.com/wmww/mate-panel.git
+    source-branch: wayland-support-2
+    source-depth: 1
+    configflags:
+      - --with-in-process-applets=all
+      - --enable-wayland
+    build-packages:
+      - yelp-tools
+      - libwnck-3-dev
+      - librsvg2-dev
+    stage-packages:
+      - libice6
+      - libwnck-3-0
+      - libsm6
+      - libxres1
+      - libstartup-notification0
+      - libxcb-util1
 
   mir-git:
     plugin: cmake
