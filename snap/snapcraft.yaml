@@ -7,6 +7,11 @@ grade: devel
 base: core18
 
 apps:
+  mate-wayland:
+    command: bin/mate-wayland.launcher
+    environment:
+      SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
+
   mirco:
     command: bin/mirco.launcher
     environment:

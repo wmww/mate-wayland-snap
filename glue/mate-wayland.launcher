@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
-${SNAP}/bin/mirco.launcher &
-sleep 0.5
-${SNAP}/bin/panel.launcher
+export WAYLAND_DISPLAY=wayland-mate
+
+(sleep 0.5; ${SNAP}/bin/panel.launcher) &
+${SNAP}/bin/mirco.launcher
