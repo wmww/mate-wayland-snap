@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+# For a classic snap this needs to be something sane
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+export WAYLAND_DISPLAY=wayland-mate
+exec $SNAP/usr/bin/mate-panel $@

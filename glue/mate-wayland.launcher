@@ -20,5 +20,7 @@ if x11_display=$(snapctl get x11-display); then
   fi
 fi
 
+export WAYLAND_DISPLAY=wayland-mate
+
 # Run server
 exec dbus-run-session -- $SNAP/bin/mirco $@
