@@ -20,17 +20,21 @@ parts:
     plugin: autotools
     source: https://github.com/mate-desktop/mate-common.git
     source-depth: 1
+    configflags:
+      - --prefix=/usr
     override-build: |
       snapcraftctl build
-      sed -i 's:^prefix=$:prefix=/root/stage/:g' ${SNAPCRAFT_PART_INSTALL}/bin/mate-doc-common
+      sed -i 's:^prefix=/usr$:prefix=/root/stage/usr/:g' ${SNAPCRAFT_PART_INSTALL}/usr/bin/mate-doc-common
     build-environment:
-      - ACLOCAL_FLAGS: -I /root/stage/share/aclocal/
+      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
 
   mate-desktop:
     after: [mate-common]
     plugin: autotools
     source: https://github.com/mate-desktop/mate-desktop.git
     source-depth: 1
+    configflags:
+      - --prefix=/usr
     build-packages:
       - intltool
       - gtk-doc-tools
@@ -64,19 +68,24 @@ parts:
     after: [mate-common]
     source: https://github.com/mate-desktop/libmateweather.git
     source-depth: 1
+    configflags:
+      - --prefix=/usr
     build-packages:
       - libsoup2.4-dev
       - tzdata
+      - libxml2-dev
 
   mate-panel:
     plugin: autotools
     after: [mate-menu, mate-common, mate-desktop, mate-weather]
     source: https://github.com/wmww/mate-panel.git
-    source-branch: wayland-support-2
+    source-branch: wayland-override-all-the-things
     source-depth: 1
     configflags:
       - --with-in-process-applets=all
       - --enable-wayland
+      - --disable-x11
+      - --prefix=/usr
     build-packages:
       - yelp-tools
       - libwnck-3-dev
@@ -183,6 +192,7 @@ parts:
     plugin: dump
     source: glue
     organize:
+      mate-panel.launcher: bin/
       mate-wayland.launcher: bin/
       mate-wayland.desktop: bin/
 
