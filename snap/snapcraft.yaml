@@ -7,17 +7,15 @@ grade: devel
 base: core18
 
 apps:
-  mate-wayland:
-    command: bin/mate-wayland.launcher
+  mirco:
+    command: bin/mirco.launcher
     environment:
-      # Prep for Mir
-      MIR_CLIENT_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/client-platform
-      MIR_SERVER_PLATFORM_PATH: ${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/server-platform
-      __EGL_VENDOR_LIBRARY_DIRS: ${SNAP}/etc/glvnd/egl_vendor.d:$SNAP/usr/share/glvnd/egl_vendor.d
-      MIR_SERVER_WAYLAND_SOCKET_NAME: wayland-mate
+      SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
   panel:
-    command: bin/mate-panel.launcher
+    command: bin/panel.launcher
+    environment:
+      SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
 parts:
   mate-common:
@@ -196,7 +194,8 @@ parts:
     plugin: dump
     source: glue
     organize:
-      mate-panel.launcher: bin/
+      panel.launcher: bin/
+      mirco.launcher: bin/
       mate-wayland.launcher: bin/
       mate-wayland.desktop: bin/
 
