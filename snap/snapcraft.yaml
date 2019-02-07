@@ -230,6 +230,8 @@ parts:
     organize:
       panel.launcher: bin/
       mirco.launcher: bin/
+      components.launcher: bin/
+      setup-env.sh: bin/
       mate-wayland.launcher: bin/
       mate-wayland.desktop: bin/
 

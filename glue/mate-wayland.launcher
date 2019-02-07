@@ -1,7 +1,10 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+IFS=$'\n\t'
 
 export WAYLAND_DISPLAY=wayland-mate
 
-(sleep 0.5; ${SNAP}/bin/panel.launcher) &
+# This shell components script will wait for Mirco to create its Wayland socket
+${SNAP}/bin/components.launcher &
+
 ${SNAP}/bin/mirco.launcher

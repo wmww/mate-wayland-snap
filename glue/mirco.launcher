@@ -1,8 +1,8 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+IFS=$'\n\t'
 
-# For a classic snap this needs to be something sane
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
+source ${SNAP}/bin/setup-env.sh
 
 if x11_display=$(snapctl get x11-display); then
   if [ -n "${x11_display}" ]; then

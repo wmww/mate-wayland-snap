@@ -1,7 +1,6 @@
 #!/bin/bash
-set -e
+set -euo pipefail
+IFS=$'\n\t'
 
-# For a classic snap this needs to be something sane
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
-echo "Starting MATE Panel on Wayland display ${WAYLAND_DISPLAY:-[nil]}"
+source ${SNAP}/bin/setup-env.sh
 exec $SNAP/usr/bin/mate-panel $@
