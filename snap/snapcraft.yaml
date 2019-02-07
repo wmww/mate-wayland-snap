@@ -8,7 +8,7 @@ base: core18
 
 apps:
   mate-wayland:
-    command: bin/mate-wayland.launcher
+    command: bin/desktop-launch ${SNAP}/bin/mate-wayland.launcher
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
@@ -18,12 +18,41 @@ apps:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
   panel:
-    command: bin/panel.launcher
+    command: bin/desktop-launch ${SNAP}/bin/panel.launcher
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
 parts:
+  desktop-gtk3:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    plugin: make
+    make-parameters: ["FLAVOR=gtk3"]
+    build-packages:
+      - build-essential
+      - libgtk-3-dev
+    stage-packages:
+      - libxkbcommon0  # XKB_CONFIG_ROOT
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
+      - libgtk-3-0
+      - libgdk-pixbuf2.0-0
+      - libglib2.0-bin
+      - libgtk-3-bin
+      - unity-gtk3-module
+      - libappindicator3-1
+      - locales-all
+      - xdg-user-dirs
+      - ibus-gtk3
+      - libibus-1.0-5
+      - fcitx-frontend-gtk3
+
   mate-common:
+    after: [desktop-gtk3]
     plugin: autotools
     source: https://github.com/mate-desktop/mate-common.git
     source-depth: 1
