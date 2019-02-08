@@ -115,7 +115,7 @@ parts:
     plugin: autotools
     after: [mate-menu, mate-common, mate-desktop, mate-weather]
     source: https://github.com/wmww/mate-panel.git
-    source-branch: wayland-override-all-the-things
+    source-branch: wayland-snap
     source-depth: 1
     configflags:
       - --with-in-process-applets=all
