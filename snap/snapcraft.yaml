@@ -71,6 +71,8 @@ parts:
     source-depth: 1
     configflags:
       - --prefix=/usr
+    build-environment:
+      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
     build-packages:
       - intltool
       - gtk-doc-tools
@@ -98,6 +100,8 @@ parts:
     # TODO change source to https://github.com/mate-desktop/mate-menus.git once https://github.com/mate-desktop/mate-menus/pull/64 is merged
     source: https://github.com/wmww/mate-menus.git
     source-depth: 1
+    build-environment:
+      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
 
   mate-weather:
     plugin: autotools
@@ -106,6 +110,8 @@ parts:
     source-depth: 1
     configflags:
       - --prefix=/usr
+    build-environment:
+      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
     build-packages:
       - libsoup2.4-dev
       - tzdata
@@ -122,6 +128,8 @@ parts:
       - --enable-wayland
       - --disable-x11
       - --prefix=/usr
+    build-environment:
+      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
     build-packages:
       - yelp-tools
       - libwnck-3-dev
