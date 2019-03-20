@@ -60,9 +60,9 @@ parts:
       - --prefix=/usr
     override-build: |
       snapcraftctl build
-      sed -i 's:^prefix=/usr$:prefix=/root/stage/usr/:g' ${SNAPCRAFT_PART_INSTALL}/usr/bin/mate-doc-common
+      sed -i 's:^prefix=/usr$:prefix=${SNAPCRAFT_STAGE}/usr/:g' ${SNAPCRAFT_PART_INSTALL}/usr/bin/mate-doc-common
     build-environment:
-      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
+      - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
 
   mate-desktop:
     after: [mate-common]
@@ -72,7 +72,7 @@ parts:
     configflags:
       - --prefix=/usr
     build-environment:
-      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
+      - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
     build-packages:
       - intltool
       - gtk-doc-tools
@@ -101,7 +101,7 @@ parts:
     source: https://github.com/wmww/mate-menus.git
     source-depth: 1
     build-environment:
-      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
+      - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
 
   mate-weather:
     plugin: autotools
@@ -111,7 +111,7 @@ parts:
     configflags:
       - --prefix=/usr
     build-environment:
-      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
+      - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
     build-packages:
       - libsoup2.4-dev
       - tzdata
@@ -129,7 +129,7 @@ parts:
       - --disable-x11
       - --prefix=/usr
     build-environment:
-      - ACLOCAL_FLAGS: -I /root/stage/usr/share/aclocal/
+      - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
     build-packages:
       - yelp-tools
       - libwnck-3-dev
