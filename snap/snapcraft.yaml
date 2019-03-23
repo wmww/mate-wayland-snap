@@ -134,6 +134,7 @@ parts:
       - yelp-tools
       - libwnck-3-dev
       - librsvg2-dev
+      - librsvg2-bin
     stage-packages:
       - libice6
       - libwnck-3-0
