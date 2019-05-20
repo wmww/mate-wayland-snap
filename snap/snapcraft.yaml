@@ -192,10 +192,10 @@ parts:
       - libxcb-composite0-dev
       - libxcursor-dev
       - libyaml-cpp-dev
+      - systemtap-sdt-dev
     stage-packages:
       - libdrm2
       - libegl1-mesa
-      - libgbm1
       - libgles2
       - libwayland-server0
       - libxcursor1
