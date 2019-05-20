@@ -97,8 +97,7 @@ parts:
   mate-menu:
     plugin: autotools
     after: [mate-common]
-    # TODO change source to https://github.com/mate-desktop/mate-menus.git once https://github.com/mate-desktop/mate-menus/pull/64 is merged
-    source: https://github.com/wmww/mate-menus.git
+    source: https://github.com/mate-desktop/mate-menus.git
     source-depth: 1
     build-environment:
       - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
