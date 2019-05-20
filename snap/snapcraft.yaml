@@ -118,7 +118,7 @@ parts:
 
   mate-panel:
     plugin: autotools
-    after: [mate-menu, mate-common, mate-desktop, mate-weather]
+    after: [desktop-gtk3, mate-menu, mate-common, mate-desktop, mate-weather]
     source: https://github.com/wmww/mate-panel.git
     source-branch: wayland-snap
     source-depth: 1
