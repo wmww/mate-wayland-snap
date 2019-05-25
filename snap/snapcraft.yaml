@@ -5,6 +5,7 @@ description: A prototype for the MATE desktop running on Wayland with Mir
 confinement: classic
 grade: devel
 base: core18
+architectures: [amd64, i386, arm64, armhf, ppc64el]
 
 apps:
   mate-wayland:
