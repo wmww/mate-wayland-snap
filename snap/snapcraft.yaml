@@ -224,6 +224,7 @@ parts:
       - libprotobuf-lite10
       - libwacom2
       - libxkbcommon0
+      - uuid-runtime
 
   mirco:
     after: [mir-git]
