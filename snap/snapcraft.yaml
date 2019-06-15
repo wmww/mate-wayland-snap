@@ -52,6 +52,12 @@ parts:
       - libibus-1.0-5
       - fcitx-frontend-gtk3
 
+  gtk-layer-shell:
+    after: [desktop-gtk3]
+    plugin: autotools
+    source: https://github.com/wmww/gtk-layer-shell.git
+    source-depth: 1
+
   mate-common:
     after: [desktop-gtk3]
     plugin: autotools
@@ -119,7 +125,13 @@ parts:
 
   mate-panel:
     plugin: autotools
-    after: [desktop-gtk3, mate-menu, mate-common, mate-desktop, mate-weather]
+    after:
+      - desktop-gtk3
+      - gtk-layer-shell
+      - mate-menu
+      - mate-common
+      - mate-desktop
+      - mate-weather
     source: https://github.com/wmww/mate-panel.git
     source-branch: wayland-snap
     source-depth: 1
