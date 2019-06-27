@@ -237,6 +237,7 @@ parts:
       - libwacom2
       - libxkbcommon0
       - uuid-runtime
+      - libuuid1
 
   mirco:
     after: [mir-git]
