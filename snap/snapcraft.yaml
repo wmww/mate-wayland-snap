@@ -5,7 +5,6 @@ description: A prototype for the MATE desktop running on Wayland with Mir
 confinement: classic
 grade: devel
 base: core18
-architectures: [amd64, i386, arm64, armhf, ppc64el]
 
 apps:
   mate-wayland:
@@ -237,8 +236,6 @@ parts:
       - libwacom2
       - libxkbcommon0
       - uuid-runtime
-      - libuuid1
-      - libudev1
       - libglibmm-2.4-1v5
       - libsigc++-2.0-0v5
       - libxml++2.6-2v5
