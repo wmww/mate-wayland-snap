@@ -98,8 +98,8 @@ parts:
       - libcairo-gobject2
       - libepoxy0
       - libgraphite2-3
-      - libgtk-3-0
       - libgdk-pixbuf2.0-0
+      - zlib1g
 
   mate-menu:
     plugin: autotools
@@ -238,6 +238,7 @@ parts:
       - libxkbcommon0
       - uuid-runtime
       - libuuid1
+      - libudev1
 
   mirco:
     after: [mir-git]
