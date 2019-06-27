@@ -239,6 +239,9 @@ parts:
       - uuid-runtime
       - libuuid1
       - libudev1
+      - libglibmm-2.4-1v5
+      - libsigc++-2.0-0v5
+      - libxml++2.6-2v5
 
   mirco:
     after: [mir-git]
