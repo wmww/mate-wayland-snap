@@ -265,3 +265,9 @@ parts:
     - libgl1-mesa-dri
     build-attributes:
     - no-patchelf # Otherwise snapcraft may strip the build ID and cause the driver to crash
+
+  snap-out:
+    # Used by the panel (as a binary, not a library) to clean the environment of snap variables when launching an external program
+    plugin: rust
+    source: https://github.com/wmww/snap-out.git
+    source-depth: 1
