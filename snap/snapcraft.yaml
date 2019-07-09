@@ -53,9 +53,15 @@ parts:
 
   gtk-layer-shell:
     after: [desktop-gtk3]
-    plugin: autotools
+    plugin: meson
     source: https://github.com/wmww/gtk-layer-shell.git
     source-depth: 1
+    build-packages:
+      - libwayland-dev
+      - gobject-introspection
+      - libgirepository1.0-dev
+    stage-packages:
+      - libwayland-client0
 
   mate-common:
     after: [desktop-gtk3]
