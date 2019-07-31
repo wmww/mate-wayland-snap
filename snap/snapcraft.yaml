@@ -160,6 +160,19 @@ parts:
       - libstartup-notification0
       - libxcb-util1
 
+  sntray-plugin:
+    plugin: cmake
+    after:
+      - desktop-gtk3
+      - mate-panel
+    source: https://gitlab.com/vala-panel-project/xfce4-sntray-plugin.git
+    source-depth: 1
+    build-packages:
+      - valac
+      - libpeas-dev
+    stage-packages:
+      - libpeas-1.0-0
+
   mir-git:
     plugin: cmake
     source: https://github.com/MirServer/mir.git
