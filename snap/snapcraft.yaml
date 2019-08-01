@@ -70,8 +70,6 @@ parts:
     source-depth: 1
     configflags:
       - --prefix=/usr
-    stage-packages:
-      - ubuntu-mate-wallpapers-common
 
   mate-common:
     after: [desktop-gtk3]
@@ -275,6 +273,7 @@ parts:
       setup-env.sh: bin/
       mate-wayland.launcher: bin/
       mate-wayland.desktop: bin/
+      Green-Wall.png: usr/share/backgrounds/mate-wayland-snap/
 
   mesa:
     plugin: nil
