@@ -83,6 +83,8 @@ parts:
       sed -i 's:^prefix=/usr$:prefix=${SNAPCRAFT_STAGE}/usr/:g' ${SNAPCRAFT_PART_INSTALL}/usr/bin/mate-doc-common
     build-environment:
       - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
+    stage-packages:
+      - mate-icon-theme
 
   mate-desktop:
     after: [mate-common]
