@@ -63,6 +63,14 @@ parts:
     stage-packages:
       - libwayland-client0
 
+  gtk-layer-background:
+    after: [desktop-gtk3, gtk-layer-shell]
+    plugin: autotools
+    source: https://github.com/wmww/gtk-layer-background.git
+    source-depth: 1
+    configflags:
+      - --prefix=/usr
+
   mate-common:
     after: [desktop-gtk3]
     plugin: autotools
