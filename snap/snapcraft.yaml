@@ -70,6 +70,8 @@ parts:
     source-depth: 1
     configflags:
       - --prefix=/usr
+    stage-packages:
+      - ubuntu-mate-wallpapers-common
 
   mate-common:
     after: [desktop-gtk3]
@@ -267,6 +269,7 @@ parts:
     source: glue
     organize:
       panel.launcher: bin/
+      background.launcher: bin/
       mirco.launcher: bin/
       components.launcher: bin/
       setup-env.sh: bin/
