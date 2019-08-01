@@ -30,4 +30,4 @@ printf "\tWAYLAND_DISPLAY: \x1b[1;36m${WAYLAND_DISPLAY:-[nil]}\x1b[0m\n"
 printf "\tXDG_RUNTIME_DIR: \x1b[1;36m${XDG_RUNTIME_DIR:-[nil]}\x1b[0m\n"
 
 $SNAP/bin/background.launcher &
-$SNAP/bin/panel.launcher &
+$SNAP/bin/panel.launcher
