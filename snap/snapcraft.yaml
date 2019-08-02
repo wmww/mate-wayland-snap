@@ -85,6 +85,7 @@ parts:
       - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
     stage-packages:
       - mate-icon-theme
+      - adwaita-icon-theme-full
 
   mate-desktop:
     after: [mate-common]
