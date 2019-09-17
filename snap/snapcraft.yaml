@@ -13,7 +13,7 @@ apps:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
   mirco:
-    command: bin/mirco.launcher
+    command: bin/desktop-launch ${SNAP}/bin/mirco.launcher
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
