@@ -2,8 +2,6 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-export WAYLAND_DISPLAY=wayland-mate
-
 # This shell components script will wait for Mirco to create its Wayland socket
 ${SNAP}/bin/components.launcher &
 
