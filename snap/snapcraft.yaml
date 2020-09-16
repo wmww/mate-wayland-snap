@@ -103,6 +103,7 @@ parts:
       - libdconf-dev
       - libgtk-3-dev
       - iso-codes
+      - autoconf-archive
     stage-packages:
       - libxcomposite1
       - libxdamage1
