@@ -183,7 +183,8 @@ parts:
     configflags:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DMIR_ENABLE_TESTS=OFF
-      - -DMIR_PLATFORM=mesa-kms;mesa-x11
+      - -DMIR_PLATFORM=gbm-kms;x11;wayland
+    # TODO Add the eglstream-kms platform when we switch to core20 (and have access to libnvidia-egl-wayland-dev/libnvidia-egl-wayland1
     # TODO Add a prime section so development headers and such don't get primed
     build-packages:
       - build-essential
