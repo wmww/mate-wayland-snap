@@ -117,6 +117,9 @@ parts:
       - libgraphite2-3
       - libgdk-pixbuf2.0-0
       - zlib1g
+      - libstartup-notification0
+      - libx11-xcb1
+      - libxcb-util1
 
   mate-menu:
     plugin: autotools
