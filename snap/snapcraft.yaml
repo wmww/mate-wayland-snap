@@ -8,17 +8,17 @@ base: core18
 
 apps:
   mate-wayland:
-    command: bin/desktop-launch ${SNAP}/bin/mate-wayland.launcher
+    command: bin/desktop-launch ${SNAP}/bin/mate-wayland.sh
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
   mirco:
-    command: bin/desktop-launch ${SNAP}/bin/mirco.launcher
+    command: bin/desktop-launch ${SNAP}/bin/mirco.sh
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
   panel:
-    command: bin/desktop-launch ${SNAP}/bin/panel.launcher
+    command: bin/desktop-launch ${SNAP}/bin/panel.sh
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
@@ -274,12 +274,10 @@ parts:
     plugin: dump
     source: glue
     organize:
-      panel.launcher: bin/
-      background.launcher: bin/
-      mirco.launcher: bin/
-      components.launcher: bin/
-      setup-env.sh: bin/
-      mate-wayland.launcher: bin/
+      panel.sh: bin/
+      background.sh: bin/
+      mirco.sh: bin/
+      mate-wayland.sh: bin/
       mate-wayland.desktop: bin/
       Green-Wall.png: usr/share/backgrounds/mate-wayland-snap/
 

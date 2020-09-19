@@ -1,8 +1,5 @@
 #!/bin/bash
 set -euo pipefail
-IFS=$'\n\t'
-
-source ${SNAP}/bin/setup-env.sh
 
 if x11_display=$(snapctl get x11-display); then
   if [ -n "${x11_display}" ]; then

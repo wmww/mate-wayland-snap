@@ -1,8 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-IFS=$'\n\t'
 
-source $SNAP/bin/setup-env.sh
 export MATE_PANEL_APPLETS_DIR=$SNAP/usr/share/mate-panel/applets/
 export MATE_PANEL_APPLET_LIB_PREFIX=$SNAP/
 export MATE_PANEL_DATA_DIR=$SNAP/usr/share/mate-panel/

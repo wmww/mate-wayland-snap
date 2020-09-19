@@ -1,8 +1,0 @@
-#!/bin/bash
-set -euo pipefail
-IFS=$'\n\t'
-
-# This shell components script will wait for Mirco to create its Wayland socket
-${SNAP}/bin/components.launcher &
-
-${SNAP}/bin/mirco.launcher

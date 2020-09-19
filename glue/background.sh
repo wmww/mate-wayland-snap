@@ -1,6 +1,3 @@
 #!/bin/bash
 set -euo pipefail
-IFS=$'\n\t'
-
-source $SNAP/bin/setup-env.sh
 exec $SNAP/usr/bin/gtk-layer-background -i $SNAP/usr/share/backgrounds/mate-wayland-snap/Green-Wall.png $@
