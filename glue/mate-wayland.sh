@@ -6,7 +6,7 @@ export XDG_RUNTIME_DIR=/run/user/$(id -u) # Since this is a classic snap, this s
 export QT_QPA_PLATFORM=wayland # Force Wayland for Qt apps
 export GDK_BACKEND=wayland # GTK apps will generally default to Wayland, but some (like Firefox) need the extra hint
 
-${SNAP}/bin/mirco.sh &
+${SNAP}/bin/mirco.sh $@ &
 SERVER_PID=$!
 
 # Wait for the socket to appear
