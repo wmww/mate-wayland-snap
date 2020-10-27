@@ -285,7 +285,6 @@ parts:
     plugin: nil
     stage-packages:
     - libgl1-mesa-dri
-    - libsensors4 # Seems to be needed by the swrast driver used in VMs
     build-attributes:
     - no-patchelf # Otherwise snapcraft may strip the build ID and cause the driver to crash
 
