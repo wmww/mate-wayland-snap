@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mkdir -p /usr/share/wayland-sessions/
-cp $SNAP/bin/mate-wayland.desktop /usr/share/wayland-sessions/mate-wayland.desktop
+cp $SNAP/usr/share/wayland-sessions/mate-wayland.desktop /usr/share/wayland-sessions/mate-wayland.desktop
 
 # Ensure Wayland support is available for Qt apps
 if [ "$(sed -Ene 's/^ID=(.*)/\1/p' /etc/os-release)" = "ubuntu" ]; then
