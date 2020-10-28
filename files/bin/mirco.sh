@@ -22,4 +22,4 @@ export MIR_SERVER_PLATFORM_PATH=${SNAP}/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/mir/se
 export __EGL_VENDOR_LIBRARY_DIRS=${SNAP}/etc/glvnd/egl_vendor.d:${SNAP}/usr/share/glvnd/egl_vendor.d
 
 # Run server
-exec dbus-run-session -- ${SNAP}/bin/mirco --enable-x11 $@
+exec dbus-run-session -- ${SNAP}/usr/local/bin/mirco --enable-x11 $@

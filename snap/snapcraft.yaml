@@ -4,21 +4,21 @@ summary: A prototype for the MATE desktop running on Wayland with Mir
 description: A prototype for the MATE desktop running on Wayland with Mir
 confinement: classic
 grade: devel
-base: core18
+base: core20
 
 apps:
   mate-wayland:
-    command: bin/desktop-launch ${SNAP}/bin/mate-wayland.sh
+    command: bin/desktop-launch $SNAP/bin/mate-wayland.sh
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
   mirco:
-    command: bin/desktop-launch ${SNAP}/bin/mirco.sh
+    command: bin/desktop-launch $SNAP/bin/mirco.sh
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
   panel:
-    command: bin/desktop-launch ${SNAP}/bin/panel.sh
+    command: bin/desktop-launch $SNAP/bin/panel.sh
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
@@ -68,7 +68,7 @@ parts:
     plugin: autotools
     source: https://github.com/wmww/gtk-layer-background.git
     source-depth: 1
-    configflags:
+    autotools-configure-parameters:
       - --prefix=/usr
 
   mate-common:
@@ -76,7 +76,7 @@ parts:
     plugin: autotools
     source: https://github.com/mate-desktop/mate-common.git
     source-depth: 1
-    configflags:
+    autotools-configure-parameters:
       - --prefix=/usr
     override-build: |
       snapcraftctl build
@@ -92,10 +92,17 @@ parts:
     plugin: autotools
     source: https://github.com/mate-desktop/mate-desktop.git
     source-depth: 1
-    configflags:
+    autotools-configure-parameters:
       - --prefix=/usr
     build-environment:
       - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
+    # As of core20, the autotools plugin refuses to run ./autogen.sh anymore
+    # ./configure must exist, but it can just be a symlink to ./autogen.sh
+    # We remove any old ./configure that may exist so ln doesn't fail
+    # If mate-desktop starts providing a ./configre this whole mess can be dropped
+    override-build: |
+      ln -sf $SNAPCRAFT_PART_BUILD/autogen.sh $SNAPCRAFT_PART_BUILD/configure
+      snapcraftctl build
     build-packages:
       - intltool
       - gtk-doc-tools
@@ -134,10 +141,17 @@ parts:
     after: [mate-common]
     source: https://github.com/mate-desktop/libmateweather.git
     source-depth: 1
-    configflags:
+    autotools-configure-parameters:
       - --prefix=/usr
     build-environment:
       - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
+    # As of core20, the autotools plugin refuses to run ./autogen.sh anymore
+    # ./configure must exist, but it can just be a symlink to ./autogen.sh
+    # We remove any old ./configure that may exist so ln doesn't fail
+    # If mate-desktop starts providing a ./configre this whole mess can be dropped
+    override-build: |
+      ln -sf $SNAPCRAFT_PART_BUILD/autogen.sh $SNAPCRAFT_PART_BUILD/configure
+      snapcraftctl build
     build-packages:
       - libsoup2.4-dev
       - tzdata
@@ -155,13 +169,21 @@ parts:
     source: https://github.com/wmww/mate-panel.git
     source-branch: wayland-snap
     source-depth: 1
-    configflags:
+    autotools-configure-parameters:
       - --with-in-process-applets=all
       - --enable-wayland
       - --disable-x11
       - --prefix=/usr
     build-environment:
       - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
+      - CFLAGS: -Wno-deprecated-declarations
+    # As of core20, the autotools plugin refuses to run ./autogen.sh anymore
+    # ./configure must exist, but it can just be a symlink to ./autogen.sh
+    # We remove any old ./configure that may exist so ln doesn't fail
+    # If mate-desktop starts providing a ./configre this whole mess can be dropped
+    override-build: |
+      ln -sf $SNAPCRAFT_PART_BUILD/autogen.sh $SNAPCRAFT_PART_BUILD/configure
+      snapcraftctl build
     build-packages:
       - yelp-tools
       - libwnck-3-dev
@@ -180,21 +202,15 @@ parts:
     source: https://github.com/MirServer/mir.git
     source-branch: mate-support
     source-depth: 1
-    configflags:
+    cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DMIR_ENABLE_TESTS=OFF
-      - -DMIR_PLATFORM=gbm-kms;x11;wayland
+      - -DMIR_PLATFORM='gbm-kms;x11;wayland'
     # TODO Add the eglstream-kms platform when we switch to core20 (and have access to libnvidia-egl-wayland-dev/libnvidia-egl-wayland1
     # TODO Add a prime section so development headers and such don't get primed
     build-packages:
       - build-essential
       - xsltproc
-      - libboost-dev
-      - libboost-date-time-dev
-      - libboost-program-options-dev
-      - libboost-system-dev
-      - libboost-filesystem-dev
-      - libboost-iostreams-dev
       - protobuf-compiler
       - libdrm-dev
       - libegl1-mesa-dev
@@ -227,6 +243,13 @@ parts:
       - libxcursor-dev
       - libyaml-cpp-dev
       - systemtap-sdt-dev
+        # Below are the ones that had a version bump in core20
+      - libboost1.71-dev
+      - libboost-date-time1.71-dev
+      - libboost-program-options1.71-dev
+      - libboost-system1.71-dev
+      - libboost-filesystem1.71-dev
+      - libboost-iostreams1.71-dev
     stage-packages:
       - libdrm2
       - libegl1-mesa
@@ -235,7 +258,6 @@ parts:
       - libxcursor1
       - libxfixes3
       - libxrender1
-      - libboost-iostreams1.65.1
       - libfreetype6
       - libgflags2.2
       - libgoogle-glog0v5
@@ -245,41 +267,36 @@ parts:
       - libwayland-egl1-mesa
       - libxcb-composite0
       - libxcb-render0
-      - libyaml-cpp0.5v5
-      - libcapnp-0.6.1
-      - libboost-system1.65.1
-      - libboost-filesystem1.65.1
-      - libboost-program-options1.65.1
       - libevdev-dev
       - libgudev-1.0-0
       - libinput10
       - libmtdev1
-      - libprotobuf-lite10
       - libwacom2
       - libxkbcommon0
       - uuid-runtime
       - libglibmm-2.4-1v5
       - libsigc++-2.0-0v5
       - libxml++2.6-2v5
+        # Below are the ones that had a version bump in core20
+      - libboost-iostreams1.71.0
+      - libboost-system1.71.0
+      - libboost-filesystem1.71.0
+      - libboost-program-options1.71.0
+      - libcapnp-0.7.0
+      - libprotobuf-lite17
+      - libyaml-cpp0.6
 
   mirco:
     after: [mir-git]
-    plugin: cmake
+    plugin: meson
     source: https://github.com/wmww/mirco.git
     source-depth: 1
     build-packages:
       - pkg-config
 
-  launcher:
+  files:
     plugin: dump
-    source: glue
-    organize:
-      panel.sh: bin/
-      background.sh: bin/
-      mirco.sh: bin/
-      mate-wayland.sh: bin/
-      mate-wayland.desktop: bin/
-      Green-Wall.png: usr/share/backgrounds/mate-wayland-snap/
+    source: files
 
   mesa:
     plugin: nil
