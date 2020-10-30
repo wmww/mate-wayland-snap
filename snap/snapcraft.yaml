@@ -299,6 +299,10 @@ parts:
     plugin: meson
     source: https://github.com/wmww/mirco.git
     source-depth: 1
+    build-environment:
+      - LDFLAGS: -Wl,-rpath=/root/stage/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}
+    meson-parameters:
+      - --buildtype=release
     build-packages:
       - pkg-config
 
