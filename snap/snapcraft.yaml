@@ -211,8 +211,7 @@ parts:
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
       - -DMIR_ENABLE_TESTS=OFF
-      - -DMIR_PLATFORM='gbm-kms;x11;wayland'
-    # TODO Add the eglstream-kms platform when we switch to core20 (and have access to libnvidia-egl-wayland-dev/libnvidia-egl-wayland1
+      - -DMIR_PLATFORM='gbm-kms;eglstream-kms;x11;wayland'
     # TODO Add a prime section so development headers and such don't get primed
     build-packages:
       - build-essential
@@ -249,6 +248,8 @@ parts:
       - libxcursor-dev
       - libyaml-cpp-dev
       - systemtap-sdt-dev
+      - eglexternalplatform-dev
+      - libnvidia-egl-wayland-dev
         # Below are the ones that had a version bump in core20
       - libboost1.71-dev
       - libboost-date-time1.71-dev
@@ -283,6 +284,7 @@ parts:
       - libglibmm-2.4-1v5
       - libsigc++-2.0-0v5
       - libxml++2.6-2v5
+      - libnvidia-egl-wayland1
         # Below are the ones that had a version bump in core20
       - libboost-iostreams1.71.0
       - libboost-system1.71.0
