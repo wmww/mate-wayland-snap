@@ -299,7 +299,7 @@ parts:
     source: https://github.com/wmww/mirco.git
     source-depth: 1
     build-environment:
-      - LDFLAGS: -Wl,-rpath=/root/stage/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}
+      - LDFLAGS: -Wl,-rpath=/root/stage/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}:/build/mate-wayland/stage/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}
     meson-parameters:
       - --buildtype=release
     build-packages:
