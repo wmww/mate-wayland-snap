@@ -284,6 +284,7 @@ parts:
       - libsigc++-2.0-0v5
       - libxml++2.6-2v5
       - libnvidia-egl-wayland1
+      #- inotify-tools
         # Below are the ones that had a version bump in core20
       - libboost-iostreams1.71.0
       - libboost-system1.71.0
