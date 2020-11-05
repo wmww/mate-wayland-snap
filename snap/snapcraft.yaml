@@ -27,6 +27,10 @@ apps:
     environment:
       SNAPCRAFT_ARCH_TRIPLET: ${SNAPCRAFT_ARCH_TRIPLET}
 
+  terminal:
+    command: bin/desktop-launch $SNAP/usr/bin/mate-terminal
+    desktop: usr/share/applications/mate-terminal.desktop
+
 parts:
   desktop-gtk3:
     source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
@@ -91,6 +95,20 @@ parts:
     stage-packages:
       - mate-icon-theme
       - adwaita-icon-theme-full
+
+  mate-terminal:
+    after: [mate-common]
+    plugin: autotools
+    source: https://github.com/mate-desktop/mate-terminal.git
+    source-depth: 1
+    autotools-configure-parameters:
+      - --prefix=/usr
+    build-environment:
+      - ACLOCAL_FLAGS: -I ${SNAPCRAFT_STAGE}/usr/share/aclocal/
+    build-packages:
+      - libvte-2.91-dev
+    stage-packages:
+      - libvte-2.91-0
 
   mate-desktop:
     after: [mate-common]
