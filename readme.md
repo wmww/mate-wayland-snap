@@ -1,4 +1,5 @@
-*\*waves hand\**
-> This is not the repo you're looking for
+# MATE-on-Wayland prototype snap
 
-(I'll add a real readme when something actually works)
+![MATE Wayland desktop screenshot](screenshots/Desktop A.png)
+
+This is an unofficial prototype MATE desktop running on Wayland with Mir. It can be installed [from the snap store](https://snapcraft.io/mate-wayland).
