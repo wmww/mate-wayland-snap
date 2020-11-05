@@ -38,7 +38,6 @@ while test ! -S "$SOCKET_PATH"; do
         wait "$SERVER_PID"
         exit 1
     fi
-    echo sleeping
     sleep 0.05
 done
 
