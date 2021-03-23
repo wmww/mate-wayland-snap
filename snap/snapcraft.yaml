@@ -223,7 +223,7 @@ parts:
   mir-git:
     plugin: cmake
     source: https://github.com/MirServer/mir.git
-    source-branch: mate-support
+    source-branch: master
     source-depth: 1
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
