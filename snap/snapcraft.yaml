@@ -331,9 +331,25 @@ parts:
   mesa:
     plugin: nil
     stage-packages:
-    - libgl1-mesa-dri
+      - libgl1-mesa-dri
+      - libtinfo5
     build-attributes:
-    - no-patchelf # Otherwise snapcraft may strip the build ID and cause the driver to crash
+      - no-patchelf # Otherwise snapcraft may strip the build ID and cause the driver to crash
+    prime:
+      - -lib/udev
+      - -usr/doc
+      - -usr/doc-base
+      - -usr/share/applications
+      - -usr/share/apport
+      - -usr/share/bug
+      - -usr/share/doc
+      - -usr/share/doc-base
+      - -usr/share/icons
+      - -usr/share/libdrm
+      - -usr/share/libwacom
+      - -usr/share/lintian
+      - -usr/share/man
+      - -usr/share/pkgconfig
 
   snap-out:
     # Used by the panel (as a binary, not a library) to clean the environment of snap variables when launching an external program
