@@ -323,6 +323,8 @@ parts:
       - --buildtype=release
     build-packages:
       - pkg-config
+    stage-packages:
+      - dbus # For dbus-run-session binary
 
   files:
     plugin: dump
