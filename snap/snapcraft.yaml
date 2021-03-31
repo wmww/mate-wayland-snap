@@ -323,8 +323,6 @@ parts:
       - --buildtype=release
     build-packages:
       - pkg-config
-    stage-packages:
-      - dbus # For dbus-run-session binary
 
   files:
     plugin: dump
@@ -335,23 +333,22 @@ parts:
     stage-packages:
       - libgl1-mesa-dri
       - libtinfo5
+      - xwayland # included in this part because it tries to pull in mesa bits
+      - libopengl0 # may be needed by XWayland?
+      - xkb-data # may be needed by XWayland?
+    stage:
+      # The libraries in .../dri need no-patchelf, so they come from the mesa-unpatched part
+      - -usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/dri
+
+  mesa-unpatched:
+    plugin: nil
+    stage-packages:
+      - libgl1-mesa-dri
     build-attributes:
       - no-patchelf # Otherwise snapcraft may strip the build ID and cause the driver to crash
-    prime:
-      - -lib/udev
-      - -usr/doc
-      - -usr/doc-base
-      - -usr/share/applications
-      - -usr/share/apport
-      - -usr/share/bug
-      - -usr/share/doc
-      - -usr/share/doc-base
-      - -usr/share/icons
-      - -usr/share/libdrm
-      - -usr/share/libwacom
-      - -usr/share/lintian
-      - -usr/share/man
-      - -usr/share/pkgconfig
+    stage:
+      # Only the libraries in .../dri need to not be patched, the rest come from the mesa part
+      - usr/lib/${SNAPCRAFT_ARCH_TRIPLET}/dri
 
   snap-out:
     # Used by the panel (as a binary, not a library) to clean the environment of snap variables when launching an external program
