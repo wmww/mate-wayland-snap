@@ -274,6 +274,8 @@ parts:
       - libboost-system1.71-dev
       - libboost-filesystem1.71-dev
       - libboost-iostreams1.71-dev
+      - libx11-xcb-dev
+      - libxkbcommon-x11-dev
     stage-packages:
       - libdrm2
       - libegl1-mesa
@@ -311,6 +313,8 @@ parts:
       - libcapnp-0.7.0
       - libprotobuf-lite17
       - libyaml-cpp0.6
+      - libx11-xcb1
+      - libxkbcommon-x11-0
 
   mirco:
     after: [mir-git]
